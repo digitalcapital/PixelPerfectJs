@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>DC PIXEL PERFECT EXAMPLE</title>
+        <link rel="stylesheet" href="css/dcpixelperfect.css">
+    </head>
+    <body class="homepage">
+        <h1>#DC Pixel Perfect</h1>
+
+        <script src="scripts/dcpixelperfect.js" type="text/javascript"></script>
+        <script>
+            var pixelPerfect = new DCPixelPerfect({
+                'pages': {
+                    'homepage': {
+                        '>1100': 'homepage-lg-devices.png',
+                        '<700': 'homepage-phone.png',
+                    },
+                    'about': {
+                        '>1100': 'about-lg-devices.png',
+                        '<700': 'about-phone.png',
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

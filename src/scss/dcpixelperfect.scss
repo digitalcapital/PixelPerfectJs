@@ -1,0 +1,17 @@
+@import 'base/all';
+@import 'helpers/all';
+
+.dc-pixel-perfect-toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    padding: 5px;
+    background-color: map-get($colors, 'black' );
+    &__select {
+
+    }
+    &__button {
+
+    }
+}
