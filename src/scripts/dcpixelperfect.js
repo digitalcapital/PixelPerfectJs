@@ -1,6 +1,4 @@
 var getScript = require('./getscript')
-var Handlebars = require('Handlebars')
-
 class DCPixelPerfect {
   constructor(options) {
     this.opts = {
@@ -9,17 +7,17 @@ class DCPixelPerfect {
       'loadjQuery': true,
       'jQuerySrc': 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
       'imagesPath': 'img',
-      'toolbarTemplate': `
-          <div class="dc-pixel-perfect-toolbar">
-              <select class="dc-pixel-perfect-toolbar__select dc-pixel-perfect-toolbar__page-select">
-                {{#options}}
-                  <option>{{this}}</option>
-                {{/options}}
-              </select>
-              <button class="dc-pixel-perfect-toolbar__button dc-pixel-perfect-toolbar__toggle-button">Toggle Layer(H)</button>
-          </div>`,
       'pages': {}
     }
+
+    this.toolbarTemplate =`
+      <div class="dc-pixel-perfect-toolbar">
+          <select class="dc-pixel-perfect-toolbar__select dc-pixel-perfect-toolbar__page-select">
+            {pages}
+          </select>
+          <button class="dc-pixel-perfect-toolbar__button dc-pixel-perfect-toolbar__toggle-button">Toggle Layer(H)</button>
+      </div>`,
+
     Object.assign(this.opts, options)
     this.checkjQuery()
   }
@@ -59,7 +57,6 @@ class DCPixelPerfect {
   }
   changePage(event) {
     var selected = $(event.currentTarget).find(":selected").text()
-    console.log(selected)
     this.setPage(selected)
   }
   setPage(page) {
@@ -92,12 +89,19 @@ class DCPixelPerfect {
       }
     }
   }
-  createToolbar() {
-    var template = Handlebars.compile(this.opts.toolbarTemplate)
-    var params = {
-      'options': Object.getOwnPropertyNames(this.opts.pages)
+  parse(template, params) {
+    for (var p in params) {
+       template = template.replace(new RegExp('{' + p + '}', 'g'), params[p])
     }
-    $('body').append( template(params) )
+    return template
+  }
+  createToolbar() {
+    var pages = Object.getOwnPropertyNames(this.opts.pages)
+    var data = { 'pages': '' }
+    for(var i = 0; i < pages.length; i++) {
+      data.pages += '<option>' + pages[i] + '</option>'
+    }
+    $('body').append( this.parse(this.toolbarTemplate, data) )
   }
   toggleLayer(event) {
     if ( (event.type === 'keydown' && event.which === 72) || event.type === 'click' ) {
