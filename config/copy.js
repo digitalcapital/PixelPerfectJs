@@ -10,5 +10,11 @@ module.exports = {
         cwd: 'src',
         src: '**/*.html',
         dest: 'dist/'
+    },
+    scripts: {
+        expand: true,
+        cwd: 'src',
+        src: 'scripts/**/*.js',
+        dest: '.tmp/'
     }
 }

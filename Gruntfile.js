@@ -6,20 +6,20 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'clean',
-    'browserify',
+    'copy',
     'babel',
+    'browserify',
     'uglify',
     'sass',
-    'copy::css',
-    'copy::scripts',
     'connect',
     'watch'
   ])
 
   grunt.registerTask('build', [
     'clean',
-    'browserify',
+    'copy:scripts',
     'babel',
+    'browserify',
     'uglify',
     'sass'
   ])

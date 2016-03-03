@@ -5,7 +5,7 @@ module.exports = {
   },
   dist: {
     files: {
-      'dist/scripts/dcpixelperfect.js': 'dist/scripts/dcpixelperfect.js'
+      '.tmp/scripts/dcpixelperfect.js': '.tmp/scripts/dcpixelperfect.js'
     }
   }
-};
+}

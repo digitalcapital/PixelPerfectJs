@@ -1,7 +1,7 @@
 module.exports = {
   scripts: {
     files: ['src/scripts/**/*.js'],
-    tasks: ['browserify', 'babel', 'uglify'],
+    tasks: ['copy:scripts', 'babel', 'browserify', 'uglify'],
     options: {
       spawn: false
     }
